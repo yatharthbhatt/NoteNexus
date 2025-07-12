@@ -111,3 +111,60 @@ const handleCreateNote = (noteData: any) => {
       </div>
     );
   }
+if (!user) {
+    return (
+      <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-purple-50 flex items-center justify-center">
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          className="text-center max-w-md mx-auto p-8"
+        >
+          <div className="mb-8">
+            <h1 className="text-4xl font-bold text-gray-900 mb-4">
+              Welcome to NoteNexus
+            </h1>
+            <p className="text-lg text-gray-600 mb-8">
+              Your advanced note-taking platform with AI-powered features, 
+              real-time collaboration, and enterprise-grade security.
+            </p>
+          </div>
+          
+          <div className="space-y-4">
+            <button
+              onClick={() => setShowAuthModal(true)}
+              className="w-full bg-blue-600 text-white py-3 px-6 rounded-lg font-medium hover:bg-blue-700 transition-colors"
+            >
+              Let's Get Started
+            </button>
+            <p className="text-sm text-gray-500">
+              Sign up for free and start organizing your Ideas 
+            </p>
+          </div>
+
+          <div className="mt-12 grid grid-cols-2 gap-4 text-sm text-gray-600">
+            <div className="text-center">
+              <div className="text-2xl mb-2">🤖</div>
+              <div>AI Assistant</div>
+            </div>
+            <div className="text-center">
+              <div className="text-2xl mb-2">🔄</div>
+              <div>Real-time Sync</div>
+            </div>
+            <div className="text-center">
+              <div className="text-2xl mb-2">🔒</div>
+              <div>End-to-end Encryption</div>
+            </div>
+            <div className="text-center">
+              <div className="text-2xl mb-2">📊</div>
+              <div>Analytics Dashboard</div>
+            </div>
+          </div>
+        </motion.div>
+
+        <AuthModal
+          isOpen={showAuthModal}
+          onClose={() => setShowAuthModal(false)}
+        />
+      </div>
+    );
+  }
