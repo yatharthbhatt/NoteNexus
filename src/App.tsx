@@ -167,3 +167,114 @@ const handleCreateNote = (noteData: any) => {
         />
       </div>
     );
+}
+  return (
+    <div className="min-h-screen bg-gray-50 flex">
+      <Sidebar
+        state={state}
+        setState={setState}
+        labels={labels}
+        onAddLabel={() => {
+          const name = prompt('Label name:');
+          if (name) {
+            createLabel({ name, color: '#3B82F6' });
+          }
+        }}
+      />
+
+      <div className="flex-1 flex flex-col">
+        <SearchBar state={state} setState={setState} />
+        
+        <header className="bg-white border-b border-gray-200 px-6 py-4">
+          <div className="max-w-7xl mx-auto">
+            <div className="flex items-center justify-between">
+              <div>
+                <h1 className="text-2xl font-bold text-gray-900">{getViewTitle()}</h1>
+                {getCurrentWorkspaceName() && (
+                  <p className="text-sm text-gray-600 mt-1">
+                    in {getCurrentWorkspaceName()}
+                  </p>
+                )}
+                {state.searchQuery && (
+                  <p className="text-sm text-gray-600 mt-1">
+                    Search results for "{state.searchQuery}"
+                  </p>
+                )}
+              </div>
+              
+              {state.currentView === 'notes' && (
+                <div className="text-sm text-gray-500">
+                  {notes.length} {notes.length === 1 ? 'note' : 'notes'}
+                </div>
+              )}
+            </div>
+          </div>
+        </header>
+
+        <main className="flex-1 overflow-auto">
+          <AnimatePresence mode="wait">
+            {state.currentView === 'analytics' ? (
+              <motion.div
+                key="analytics"
+                initial={{ opacity: 0, x: 20 }}
+                animate={{ opacity: 1, x: 0 }}
+                exit={{ opacity: 0, x: -20 }}
+              >
+                <AnalyticsDashboard />
+              </motion.div>
+            ) : (
+              <motion.div
+                key="notes"
+                initial={{ opacity: 0, x: 20 }}
+                animate={{ opacity: 1, x: 0 }}
+                exit={{ opacity: 0, x: -20 }}
+              >
+                <NoteGrid
+                  notes={notes}
+                  labels={labels}
+                  onUpdateNote={updateNote}
+                  onTogglePin={togglePin}
+                  onToggleArchive={toggleArchive}
+                  onToggleTrash={toggleTrash}
+                  onDeleteNote={deleteNote}
+                />
+              </motion.div>
+            )}
+          </AnimatePresence>
+        </main>
+
+        {state.currentView === 'notes' && (
+          <FloatingActionButton onClick={() => setShowCreateModal(true)} />
+        )}
+
+        <CreateNoteModal
+          isOpen={showCreateModal}
+          onClose={() => setShowCreateModal(false)}
+          onCreate={handleCreateNote}
+          labels={labels}
+          defaultColors={defaultColors}
+        />
+      </div>
+    </div>
+  );
+}
+
+function App() {
+  return (
+    <QueryClientProvider client={queryClient}>
+      <AppContent />
+      <Toaster 
+        position="bottom-right"
+        toastOptions={{
+          duration: 3000,
+          style: {
+            background: '#363636',
+            color: '#fff',
+          },
+        }}
+      />
+    </QueryClientProvider>
+  );
+}
+
+export default App;
