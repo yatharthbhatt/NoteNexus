@@ -80,3 +80,114 @@ const AIAssistant: React.FC<AIAssistantProps> = ({ noteContent, onSuggestionAppl
             </div>
 
             <div className="p-4 space-y-4">
+                            {/* Analyze Note */}
+              <div>
+                <button
+                  onClick={handleAnalyze}
+                  disabled={loading || !noteContent.trim()}
+                  className="w-full flex items-center gap-2 px-4 py-3 bg-blue-50 text-blue-700 rounded-lg hover:bg-blue-100 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+                >
+                  {loading ? <Loader className="w-4 h-4 animate-spin" /> : <Lightbulb className="w-4 h-4" />}
+                  Analyze This Note
+                </button>
+              </div>
+
+              {/* Analysis Results */}
+              {analysis && (
+                <motion.div
+                  initial={{ opacity: 0, height: 0 }}
+                  animate={{ opacity: 1, height: 'auto' }}
+                  className="space-y-3"
+                >
+                  {analysis.summary && (
+                    <div className="p-3 bg-gray-50 rounded-lg">
+                      <h4 className="font-medium text-gray-900 mb-2">Summary</h4>
+                      <p className="text-sm text-gray-700">{analysis.summary}</p>
+                    </div>
+                  )}
+
+                  {analysis.tags && analysis.tags.length > 0 && (
+                    <div className="p-3 bg-green-50 rounded-lg">
+                      <h4 className="font-medium text-gray-900 mb-2 flex items-center gap-2">
+                        <Tag className="w-4 h-4" />
+                        Suggested Tags
+                      </h4>
+                      <div className="flex flex-wrap gap-2">
+                        {analysis.tags.map((tag: string, index: number) => (
+                          <button
+                            key={index}
+                            onClick={() => applySuggestion('tag', tag)}
+                            className="px-2 py-1 bg-green-100 text-green-700 rounded-full text-xs hover:bg-green-200 transition-colors"
+                          >
+                            {tag}
+                          </button>
+                        ))}
+                      </div>
+                    </div>
+                  )}
+
+                  {analysis.todos && analysis.todos.length > 0 && (
+                    <div className="p-3 bg-yellow-50 rounded-lg">
+                      <h4 className="font-medium text-gray-900 mb-2 flex items-center gap-2">
+                        <CheckSquare className="w-4 h-4" />
+                        Action Items
+                      </h4>
+                      <div className="space-y-1">
+                        {analysis.todos.map((todo: string, index: number) => (
+                          <button
+                            key={index}
+                            onClick={() => applySuggestion('todo', todo)}
+                            className="block w-full text-left px-2 py-1 text-sm text-yellow-700 hover:bg-yellow-100 rounded transition-colors"
+                          >
+                            • {todo}
+                          </button>
+                        ))}
+                      </div>
+                    </div>
+                  )}
+
+                  {analysis.suggestions && analysis.suggestions.length > 0 && (
+                    <div className="p-3 bg-purple-50 rounded-lg">
+                      <h4 className="font-medium text-gray-900 mb-2">Suggestions</h4>
+                      <div className="space-y-1">
+                        {analysis.suggestions.map((suggestion: string, index: number) => (
+                          <p key={index} className="text-sm text-purple-700">
+                            • {suggestion}
+                          </p>
+                        ))}
+                      </div>
+                    </div>
+                  )}
+                </motion.div>
+              )}
+
+              {/* Content Generation */}
+              <div className="border-t border-gray-200 pt-4">
+                <h4 className="font-medium text-gray-900 mb-2">Generate Content</h4>
+                <div className="space-y-2">
+                  <input
+                    type="text"
+                    value={prompt}
+                    onChange={(e) => setPrompt(e.target.value)}
+                    placeholder="Describe what you want to generate..."
+                    className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-purple-500 outline-none text-sm"
+                  />
+                  <button
+                    onClick={handleGenerate}
+                    disabled={loading || !prompt.trim()}
+                    className="w-full flex items-center gap-2 px-4 py-2 bg-purple-600 text-white rounded-lg hover:bg-purple-700 disabled:opacity-50 disabled:cursor-not-allowed transition-colors text-sm"
+                  >
+                    {loading ? <Loader className="w-4 h-4 animate-spin" /> : <Sparkles className="w-4 h-4" />}
+                    Generate
+                  </button>
+                </div>
+              </div>
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </div>
+  );
+};
+
+export default AIAssistant;
