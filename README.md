@@ -1,13 +1,13 @@
 # 🧠 NoteNexus — Your Advanced Note-Taking Powerhouse
 
 A sleek, fast, and ultra-productive web app that reimagines note-taking for the modern dev, student, and digital thinker.  
-**Google Keep on steroids** — backed by full-stack wizardry & turbocharged with AI ✨
+ backed by full-stack wizardry & turbocharged with AI ✨
 
 > **Built with**: ⚛️ React • ⚡ Vite • 🎨 TailwindCSS • 🔐 Firebase / Supabase • 🧠 GPT • 🌐 PWA
 
 ---
 
-## 🔑 Core Features (Google Keep Parity ✅)
+## 🔑 Core Features 
 
 - 📝 **Rich Notes**: Text, images, checklists  
 - 🏷️ **Labels & Tags**: Color-coded organization  
