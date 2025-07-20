@@ -1,4 +1,8 @@
-# 🧠 NoteNexus — Your Advanced Note-Taking Powerhouse
+<p align="center">
+  <img src="https://github.com/user-attachments/assets/759b2f84-0195-4989-beee-5afe461c352b" width="150"/>
+</p>
+<h1 align="center">🧠 NoteNexus — Your Advanced Note-Taking Powerhouse</h1>
+
 
 A sleek, fast, and ultra-productive web app that reimagines note-taking for the modern dev, student, and digital thinker.  
  backed by full-stack wizardry & turbocharged with AI ✨
@@ -76,6 +80,10 @@ VITE_FIREBASE_APP_ID=your_app_id
 npm run dev
 ```
 💻 Built with ❤️ by Yatharth Bhatt
+<img width="1918" height="1078" alt="Screenshot 2025-07-21 030921" src="https://github.com/user-attachments/assets/16408cb7-4d7b-4856-a6d5-eea431788942" />
+<img width="1886" height="1074" alt="Screenshot 2025-07-21 030602" src="https://github.com/user-attachments/assets/4b388f28-7dfc-4fa6-8bd1-2e38467bf82f" />
+<img width="1919" height="1079" alt="Screenshot 2025-07-21 031157" src="https://github.com/user-attachments/assets/fcd205dc-c4aa-4042-8e96-50827830d984" />
+<img width="1918" height="1078" alt="Screenshot 2025-07-21 031218" src="https://github.com/user-attachments/assets/3242e4a3-7c1a-4e55-8f69-54b175e9ddf9" />
 
 
 
